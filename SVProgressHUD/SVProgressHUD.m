@@ -384,6 +384,7 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
         _isInitializing = YES;
         
         self.userInteractionEnabled = NO;
+        self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         self.activityCount = 0;
         
         self.backgroundView.alpha = 0.0f;
@@ -521,6 +522,13 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
     self.statusLabel.center = CGPointMake(CGRectGetMidX(self.hudView.bounds), centerY);
     
     [CATransaction commit];
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    if (_backgroundRadialGradientLayer) {
+        _backgroundRadialGradientLayer.frame = self.bounds;
+    }
 }
 
 #if TARGET_OS_IOS
